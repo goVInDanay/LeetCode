@@ -1,0 +1,42 @@
+class Solution {
+    public ListNode find_MidNode(ListNode head){
+        // finding the midNode --> [5,4,2,1] -> [5,4],[2,1]
+
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        } 
+        return slow;
+    }
+    public ListNode reverse(ListNode head){
+        // reversing the midNode [5,4],[1,2]
+        ListNode curr=head;
+        ListNode prev=null;
+        ListNode next;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+    public int pairSum(ListNode head) {
+        if(head.next.next==null){
+            return head.val+head.next.val;
+        }
+        ListNode right=find_MidNode(head);
+        right=reverse(right);
+        ListNode left=head;
+        int max=0;
+        while(right!=null){
+            //finding the max value by adding the right half and left half 
+            max=Math.max(left.val+right.val,max);
+            left=left.next;
+            right=right.next;
+        }
+        return max;
+    }
+}
