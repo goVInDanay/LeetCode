@@ -1,0 +1,20 @@
+class Solution {
+    public int hIndex(int[] citations) {
+        int start=0;
+        int end=citations.length;
+        while(start<end){
+            int mid=(start+end+1)/2;
+            int count=0;
+            for(int i=0;i<citations.length;i++)
+            {
+                if(citations[i]>=mid)
+                count++;
+            }
+            if(count>=mid)
+            start=mid;
+            else 
+            end=mid-1;       
+        }
+        return start;
+    }
+}
