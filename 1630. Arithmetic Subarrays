@@ -1,0 +1,22 @@
+class Solution {
+    public List<Boolean> checkArithmeticSubarrays(int[] nums, int[] l, int[] r) {
+        List<Boolean> ls=new ArrayList<>();
+        for(int i=0;i<l.length;i++){
+            int sub[]=new int[r[i]-l[i]+1];
+            int k=0;
+            for(int j=l[i];j<=r[i];j++)
+            sub[k++]=nums[j];
+            ls.add(isArthimetic(sub));
+        }
+        return ls;
+    }
+    public boolean isArthimetic(int []arr){
+        Arrays.sort(arr);
+        int diff=arr[1]-arr[0];
+        for(int i=2;i<arr.length;i++){
+            if(arr[i]-arr[i-1]!=diff)
+            return false;
+        }
+        return true;
+    }
+}
