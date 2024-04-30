@@ -1,0 +1,13 @@
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        int xor=nums[0];
+        for(int i=1;i<nums.length;i++)
+        xor=xor^nums[i];
+        xor=xor^k;
+        String bin=Integer.toBinaryString(xor);
+        int ops=0;
+        for(int i=0;i<bin.length();i++)
+        ops+=bin.charAt(i)=='1'?1:0;
+        return ops;
+    }
+}
